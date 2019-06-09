@@ -34,13 +34,15 @@
 
             />
         <EditText
-            android:background="@android:color/transparent"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Note"
             android:id="@+id/etNote"
             android:lines="5"
             android:gravity="top|left"
+            android:background="@drawable/bg_add_note"
+            android:padding="16dp"
 
             />
         <LinearLayout
