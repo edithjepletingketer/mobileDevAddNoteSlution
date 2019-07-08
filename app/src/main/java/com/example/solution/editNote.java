@@ -1,6 +1,5 @@
 package com.example.solution;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -14,14 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.solution.database.DatabaseHelper;
 import com.example.solution.database.Note;
 
 import javax.annotation.Nullable;
 
-public class AddNoteActivitty extends AppCompatActivity {
+public class editNote extends AppCompatActivity {
+
     EditText etTitle;
     EditText etNote;
     Button btnAddPhoto;
@@ -82,7 +81,7 @@ public class AddNoteActivitty extends AppCompatActivity {
             Bundle bundle=data.getExtras();
             Bitmap bitmap=(Bitmap)bundle.get("data");
             imgView.setImageBitmap(bitmap);
-            Log.d("name",bitmap.toString());
+           Log.d("name",bitmap.toString());
         }
     }
 

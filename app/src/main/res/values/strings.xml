@@ -3,7 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_add_note_activitty">AddNoteActivitty</string>
     <string name="title_activity_view_note">ViewNote</string>
-    <string name="view">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid, architecto at delectus distinctio dolores eveniet explicabo laborum laudantium praesentium quas quia quidem reiciendis saepe sed ullam voluptas voluptatem. Quis?
-    s distinctio dolores eveniet explicabo laborum laudantium praesentium quas quia quidem reiciendis saepe sed ullam voluptas voluptatem. Quis
-    s distinctio dolores eveniet explicabo laborum laudantium praesentium quas quia quidem reiciendis saepe sed ullam voluptas voluptatem. Quis</string>
+    <string name="view">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid, architecto at delectus distinctio dolores eveniet explicabo laborum laudantium praesentium quas quia quidem reiciendis saepe sed ullam voluptas voluptatem.</string>
+    <string name="title_activity_edit_note">editNote</string>
 </resources>
