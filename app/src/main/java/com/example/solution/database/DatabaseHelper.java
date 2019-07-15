@@ -13,6 +13,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
+
     }
 
     @Override
@@ -22,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+//        db.execSQL("ALTER TABLE notes ADD COLUMN images INTEGER DEFAULT 0");
     }
     public long addNote(Note note){
         SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();
@@ -37,6 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Note>notesList=new ArrayList<Note>();
         String query = "SELECT * FROM notes";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+//        onUpgrade(sqLiteDatabase,0,1);
+
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         if (cursor.moveToFirst()==true){
             do {
@@ -51,6 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         sqLiteDatabase.close();
         return notesList;
+
     }
     public Note getNoteById(int id){
         Note note = new Note();
@@ -74,17 +78,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
-    public void updateNote(int id){
-        SQLiteDatabase sqLiteDatabase=this.getReadableDatabase();
+    public int updateNote(Note note){
+        SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put("title",note.getTitle());
+        contentValues.put("noteText",note.getNoteText());
         String tableName="notes";
         String whereClause="id=?";
-//        String[]whereArgs=new String[]{String.valueOf(id)};
-//        sqLiteDatabase.update(tableName, whereClause,[]);
 
+        return sqLiteDatabase.update(tableName, contentValues, whereClause,
+                new String[]{String.valueOf(note.getId())});
 
     }
-
-
-
 
 }

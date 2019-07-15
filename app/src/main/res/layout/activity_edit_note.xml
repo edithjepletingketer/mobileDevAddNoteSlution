@@ -79,10 +79,10 @@
 
         <Button
             android:background="@drawable/bg_button_pink"
-            android:id="@+id/btnSave"
+            android:id="@+id/btnUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Save"
+            android:text="Update"
 
             />
 

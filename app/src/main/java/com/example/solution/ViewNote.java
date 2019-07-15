@@ -1,5 +1,6 @@
 package com.example.solution;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,7 +19,7 @@ int noteId;
 TextView tvTitle;
 TextView tvNoteText;
 Button btnDelete;
-Button btnUpdate;
+Button btnEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,14 +27,12 @@ Button btnUpdate;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        getNoteId();
        tvTitle=findViewById(R.id.tvTitle);
        tvNoteText=findViewById(R.id.tvNoteText);
        btnDelete=findViewById(R.id.btnDelete);
-       btnUpdate=findViewById(R.id.btnUpdate);
+       btnEdit=findViewById(R.id.btnEdit);
        displayNote();
 
 
@@ -41,18 +40,20 @@ Button btnUpdate;
            @Override
            public void onClick(View v) {
                DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext(),"notes",null,1);
-               finish();
                databaseHelper.deleteNote(noteId);
+               finish();
                                         }
                                     }
        );
 
-       btnUpdate.setOnClickListener(new View.OnClickListener() {
+       btnEdit.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext(),"notes",null,1);
-               databaseHelper.updateNote(noteId);
-               finish();
+               Intent intent =new Intent(getBaseContext(),editNote.class);
+               intent.putExtra("NOTE_ID",noteId);
+               startActivity(intent);
+
+
 
            }
        });

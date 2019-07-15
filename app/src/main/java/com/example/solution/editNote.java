@@ -1,7 +1,6 @@
 package com.example.solution;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
+
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -23,11 +22,10 @@ public class editNote extends AppCompatActivity {
 
     EditText etTitle;
     EditText etNote;
-    Button btnAddPhoto;
-    Button btnAddVoiceNote;
-    Button btnSave;
+    Button btnUpdate;
     String noteText;
     String title;
+    int noteId;
     ImageView imgView;
 
     private static final int CAPTURE_IMAGE_REQUEST_CODE=500;
@@ -37,36 +35,31 @@ public class editNote extends AppCompatActivity {
         setContentView(R.layout.activity_add_note_activitty);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        getNoteId();
         etTitle = findViewById(R.id.etTitle);
         etNote = findViewById(R.id.etNote);
-        btnAddPhoto = findViewById(R.id.btnAddPhoto);
-        btnAddVoiceNote = findViewById(R.id.btnAddVoiceNote);
-        btnSave = findViewById(R.id.btnSave);
+        btnUpdate = findViewById(R.id.btnSave);
+
         imgView =findViewById(R.id.imgView);
-
-
-        btnAddPhoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,CAPTURE_IMAGE_REQUEST_CODE);
-            }
-        });
+        displayNote();
 
 
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 title = etTitle.getText().toString();
                 noteText = etNote.getText().toString();
-                Note note = new Note(title,noteText);
+                Note note = new Note(noteId, title,noteText);
                 DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext(),"notes",null,1);
-                long rows = databaseHelper.addNote(note);
-                Log.d("AddNote","the number of notes is "+rows);
+                long rows = databaseHelper.updateNote(note);
+
             }
         });
 
@@ -75,14 +68,20 @@ public class editNote extends AppCompatActivity {
 
 
     }
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-        if (requestCode==CAPTURE_IMAGE_REQUEST_CODE&& requestCode==RESULT_OK){
-            Bundle bundle=data.getExtras();
-            Bitmap bitmap=(Bitmap)bundle.get("data");
-            imgView.setImageBitmap(bitmap);
-           Log.d("name",bitmap.toString());
+
+    public void getNoteId(){
+        Bundle bundle=getIntent().getExtras();
+        if(bundle!=null){
+            noteId=bundle.getInt("NOTE_ID",0);
         }
+    }
+    public void displayNote(){
+        DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext(),"notes",null,1);
+        Note note=databaseHelper.getNoteById(noteId);
+        etTitle.setText(note.getTitle());
+        etNote.setText(note.getNoteText());
     }
 
 }
+
+
