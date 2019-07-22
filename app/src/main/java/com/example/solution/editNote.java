@@ -56,6 +56,7 @@ public class editNote extends AppCompatActivity {
             public void onClick(View v) {
                 title = etTitle.getText().toString();
                 noteText = etNote.getText().toString();
+
                 Note note = new Note(noteId, title,noteText);
                 DatabaseHelper databaseHelper = new DatabaseHelper(getBaseContext(),"notes",null,1);
                 long rows = databaseHelper.updateNote(note);

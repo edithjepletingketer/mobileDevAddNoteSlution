@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//        db.execSQL("ALTER TABLE notes ADD COLUMN images INTEGER DEFAULT 0");
+
     }
     public long addNote(Note note){
         SQLiteDatabase sqLiteDatabase= this.getWritableDatabase();
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Note>notesList=new ArrayList<Note>();
         String query = "SELECT * FROM notes";
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-//        onUpgrade(sqLiteDatabase,0,1);
+
 
         Cursor cursor = sqLiteDatabase.rawQuery(query,null);
         if (cursor.moveToFirst()==true){

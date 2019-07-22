@@ -82,7 +82,7 @@ List<Note> noteList;
     protected void onResume() {
         super.onResume();
         displayNotes();
-//        displayNames();
+
     }
 
     @Override
